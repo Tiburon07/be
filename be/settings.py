@@ -150,3 +150,8 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
+
+try:
+    from .local_setting import *
+except ImportError:
+    pass
