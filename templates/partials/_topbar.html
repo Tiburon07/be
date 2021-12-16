@@ -1,0 +1,74 @@
+{% load i18n %}
+{% load static %}
+<div class="it-header-slim-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="it-header-slim-wrapper-content">
+                    {% if request.user.is_authenticated %}
+                        <span class="d-none d-lg-block navbar-brand">
+                            <svg class="icon">
+                                <use xlink:href="{% static 'svg/sprite.svg' %}#it-user"></use>
+                            </svg>
+                            <span class="h6">{{ request.user.username }}</span>
+                        </span>
+                        <div class="nav-mobile">
+                            <nav>
+                                <a class="it-opener d-lg-none" data-toggle="collapse" href="#menu-principale" role="button" aria-expanded="false" aria-controls="menu-principale">
+                                    <span>{{ request.user.username }}</span>
+                                    <svg class="icon">
+                                        <use xlink:href="{% static 'svg/sprite.svg' %}#it-expand"></use>
+                                    </svg>
+                                </a>
+                                {% block header_mobile_slim_menu %}
+                                <div class="link-list-wrapper collapse" id="menu-principale">
+                                    <ul class="link-list">
+                                        <li><a href="{% url 'index' %}">Profilo</a></li>
+                                        <li><a href="{% url 'password_change' %}">Aggiorna password</a></li>
+                                    </ul>
+                                    <ul class="link-list">
+                                        <li><a href="{% url 'logout' %}">Esci</a></li>
+                                    </ul>
+                                </div>
+                                {% endblock header_mobile_slim_menu %}
+                            </nav>
+                        </div>
+                    {% endif %}
+                    {% block header_slim_right_zone %}
+                    <div class="header-slim-right-zone">
+                        {% block header_slim_sub_menu %}
+                        <div class="it-header-slim-wrapper">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="it-header-slim-wrapper-content">
+                                            <div class="header-slim-right-zone">
+                                                <div class="it-access-top-wrapper">
+                                                    {% if not request.user.is_authenticated %}
+                                                        <a class="btn btn-primary btn-icon btn-full" href="{% url 'login' %}" data-icon="it-user" title="Accedi all'area personale" style="">
+                                                            <span class="rounded-icon">
+                                                                <svg class="icon-primary">
+                                                                    <use xlink:href="{% static 'svg/sprite.svg' %}#it-user">
+                                                                    </use>
+                                                                </svg>
+                                                            </span>
+                                                            <span class="text-nowrap pr-2">Accedi all'area personale</span>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock header_slim_sub_menu %}
+                {% block header_slim_buttons %}
+                {% endblock header_slim_buttons %}
+                {% endblock header_slim_right_zone %}
+            </div>
+        </div>
+    </div>
+</div>

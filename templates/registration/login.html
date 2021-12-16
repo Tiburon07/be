@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block page_title %} {{ block.super }} - login {% endblock page_title %}
+{% block centered_container %}
+  <section id="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header">
+              <h3>Accedi! </h3>
+            </div>
+            <div class="card-body">
+              {% include 'partials/_alerts.html' %}
+              <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Login" class="btn btn-primary btn-block">
+                <input type="hidden" value="{{ next }}" name="next">
+              </form>
+                <br>
+              <p><a href="{% url 'password_reset' %}">Password dimenticata?</a></p>
+              <p>Non hai un account? <a href="{% url 'registrazion_view' %}">Registrati!</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

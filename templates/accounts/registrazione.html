@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block centered_container %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h3>Nuovo utente!</h3>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-primary" value="Crea Account"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

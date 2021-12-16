@@ -1,0 +1,132 @@
+{% load django_bootstrap_italia_tags %}
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Page details -->
+        <title>
+            {% block page_title %} Gestionale {% endblock page_title %}
+        </title>
+        <meta name="description" content="{% block page_meta_description %}Softuware Developer{% endblock page_meta_description %}">
+        <meta name="keywords" content="{% block page_meta_keywords %}Softuware Developer{% endblock page_meta_keywords %}">
+        <meta name="robots" content="{% block page_meta_robots %}all{% endblock page_meta_robots %}" />
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap-italia.min.css' %}">
+        <!-- Fonts -->
+        <script>window.__PUBLIC_PATH__ = "{% static 'fonts' %}"</script>
+        <!-- Javascript -->
+        <script src="{% static 'js/bootstrap-italia.bundle.min.js' %}"></script>
+        <!-- Extra CSS/Javascript -->
+        {% block extra_head %}
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="icon" href="{% static 'images/favicon-32x32.png' %}" sizes="32x32" type="image/png">
+        <link rel="icon" href="{% static 'images/favicon-16x16.png' %}" sizes="16x16" type="image/png">
+        {% endblock extra_head %}
+    </head>
+    <body>
+        {% block header_wrapper %}
+        <div class="it-header-wrapper">
+
+            <!-- Top row in header -->
+            {% block header_slim_wrapper %}
+                {% include 'partials/_topbar.html' %}
+            {% endblock header_slim_wrapper %}
+
+            <div class="it-nav-wrapper">
+                <div class="it-header-center-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="{% block header_center_wrapper_columns %}col-12{% endblock header_center_wrapper_columns %}">
+                                <div class="it-header-center-content-wrapper">
+                                    <!-- Logo -->
+                                    {% block header_brand_wrapper %}
+                                    <div class="it-brand-wrapper">
+                                        <a href="{% block header_center_url %}{% url 'index' %}{% endblock header_center_url %}">
+                                            {% block header_center_logo %}
+                                            <svg class="icon">
+                                                <use xlink:href="{% static 'svg/sprite.svg' %}#it-code-circle"></use>
+                                            </svg>
+                                            {% endblock header_center_logo %}
+
+                                            <div class="it-brand-text">
+                                                <h2 class="no_toc">
+                                                    {% block header_center_org_name %}
+                                                    Gestionale
+                                                    {% endblock header_center_org_name %}
+                                                </h2>
+                                                <h3 class="no_toc d-none d-md-block">
+                                                    {% block header_center_org_subname %}
+                                                    Software Development
+                                                    {% endblock header_center_org_subname %}
+                                                </h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endblock header_brand_wrapper %}
+
+                                    <!-- Social and Search -->
+                                    {% block header_center_right_zone %}
+                                    <div class="it-right-zone">
+                                        <!--<img src="{% static 'images/logo-sportesalute.png' %}" alt="logo" width="200 rem">-->
+                                        {% block header_center_social %}
+                                        {% endblock header_center_social %}
+
+                                        {% block header_center_search %}
+                                        {% endblock header_center_search %}
+                                    </div>
+                                    {% endblock header_center_right_zone %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main menu -->
+                {% block main_menu %}
+                    {% include 'partials/_navbar.html' %}
+                {% endblock main_menu %}
+            </div>
+        </div>
+        {% endblock header_wrapper %}
+
+        {% include 'partials/_alerts.html'%}
+
+        <!-- Container - Body of page-->
+        <div class="main-body">
+            {% block container %}
+            <div class="container">
+                <div class="col-12 py-md-5 bd-content">
+                    {% block centered_container %}{% endblock %}
+                </div>
+                <div class="col-12 pt-2"></div>
+            </div>
+            {% endblock container %}
+        </div>
+
+
+
+        <!-- Footer -->
+        {% block footer %}
+            {% include 'partials/_footer.html' %}
+        {% endblock footer %}
+
+        {% block bottom_scripts %}
+        <script>
+        <!-- Placed here to take customizable settings value -->
+        {% default_js_date_value as default_js_date_value %}
+        $(document).ready(function() {
+            $('.it-date-datepicker').datepicker({
+                inputFormat: ["{{ default_js_date_value }}"],
+                outputFormat: "{{ default_js_date_value }}",
+            });
+        });
+        </script>
+        {% endblock bottom_scripts %}
+        {% block extra_scripts %}{% endblock extra_scripts %}
+    </body>
+</html>
